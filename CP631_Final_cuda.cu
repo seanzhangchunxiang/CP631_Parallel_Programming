@@ -15,6 +15,7 @@
 ** CPU runs the sieve arithmetic for the range [2, CPU_CALC_END)
 ** and GPU runs the remain part [CPU_CALC_END, MAX_NUMBER]    */
 #define    CPU_CALC_END          (32000)
+#define    BLOCK_SIZE            (512)
 
 
 typedef struct
@@ -102,20 +103,39 @@ void insertNewDistance(int distance, int smallPrime, int largePrime)
 ******************************************************************************/
 __global__  void getPrimeCUDA(unsigned char* dev, int* prm, int limit)
 {
-    int j;
+    int j, k;
     int testPrime;
     int x;
+    int start, end;
+    int range;
 
-    x = blockIdx.x * blockDim.x + threadIdx.x;
+    x = threadIdx.x;
+    range = (MAX_NUMBER - CPU_CALC_END) / BLOCK_SIZE;
 
-    if (x < limit)
-	{
-        testPrime = prm[x];
-        for (j=testPrime+testPrime; j<MAX_NUMBER; j+=testPrime)
+    start = CPU_CALC_END + range * x;
+    end = start + range;
+
+    if ((BLOCK_SIZE-1) == x)
+    {
+        end = MAX_NUMBER;
+    }
+
+    for (k=0; k<limit; k++)
+    {
+        testPrime = prm[k];
+
+        j = start -(start % testPrime);
+
+        if (j < start)
+        {
+            j += testPrime;
+        }
+
+        for (; j<end; j+=testPrime)
         {
             dev[j]=0;
-		}
-	}
+        }
+    }
 }
 
 
@@ -124,13 +144,12 @@ int main()
     unsigned char* sieve;
     unsigned char* devA;
     /* Save the found prime and pass them to cuda. The length is estimated: 1-1/2-1/3 = 1/6 */
-	int primeByCPU[CPU_CALC_END/6];
+    int primeByCPU[CPU_CALC_END/6];
     int* devPrimes;
 
-	int foundByCPU = 0;
+    int foundByCPU = 0;
     int i;
     int j;
-    int blockSize, nBlocks;
     int totalSize;
     struct timeval  startTime; /* Record the start time */
     struct timeval  currentTime;  /* Record the current time */
@@ -193,36 +212,31 @@ int main()
 
         lastPrime = i;
     }
+    gettimeofday(&currentTime, NULL);
+    printf ("First time taken by CPU:  %f seconds\n",
+             (double) (currentTime.tv_usec - startTime.tv_usec) / 1000000 +
+             (double) (currentTime.tv_sec - startTime.tv_sec));
 
     /* allocate arrays on device */
-    cudaMalloc((void **) &devPrimes, foundByCPU * sizeof(int));
+    cudaMalloc((void **) &devPrimes, foundByCPU*sizeof(int));
 
     /* copy arrays to device memory (synchronous) */
     cudaMemcpy(devA, sieve, totalSize, cudaMemcpyHostToDevice);
 
     /* copy arrays to device memory (synchronous) */
-    cudaMemcpy(devPrimes, primeByCPU, foundByCPU * sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(devPrimes, primeByCPU, foundByCPU*sizeof(int), cudaMemcpyHostToDevice);
     /* guarantee synchronization */
     cudaDeviceSynchronize();
 
-    blockSize = 512;
-    nBlocks = foundByCPU / blockSize;
-	
-	if (0 !=(foundByCPU % blockSize))
-	{
-	    nBlocks++;
-	}
-
     /* execute kernel (asynchronous!) */
-    getPrimeCUDA<<<nBlocks, blockSize>>>(devA, devPrimes, foundByCPU);
+    getPrimeCUDA<<<1, BLOCK_SIZE>>>(devA, devPrimes, foundByCPU);
 
     /* retrieve results from device (synchronous) */
     cudaMemcpy(&sieve[CPU_CALC_END], &devA[CPU_CALC_END], totalSize-CPU_CALC_END, cudaMemcpyDeviceToHost);
-	cudaMemcpy(primeByCPU, devPrimes, foundByCPU * sizeof(int), cudaMemcpyDeviceToHost);
 
     /* guarantee synchronization */
     cudaDeviceSynchronize();
-	
+
     for (i=CPU_CALC_END; i<MAX_NUMBER; i++)
     {
         if(sieve[i]==0)
@@ -245,8 +259,8 @@ int main()
     }
 
     gettimeofday(&currentTime, NULL);
-    printf("Largest prime number is %d. Total prime blocks (%d)\n", lastPrime, nBlocks);
-    printf("Now, print the %d biggest distances between two continue prime numbers.\n", NEEDED_PRIME_NUM);
+    printf("Largest prime number is %d. \n", lastPrime);
+    printf("Now, print the 5 biggest distances between two continue prime numbers.\n");
     for(i=0;i<NEEDED_PRIME_NUM;i++)
     {
         printf("Between continue prime number (%d) and (%d), the distance is (%d). \n", primeList[i].smallPrime, primeList[i].largePrime, primeList[i].distance);
@@ -255,6 +269,5 @@ int main()
              (double) (currentTime.tv_usec - startTime.tv_usec) / 1000000 +
              (double) (currentTime.tv_sec - startTime.tv_sec));
     free(sieve);
-
     return 0;
 }
