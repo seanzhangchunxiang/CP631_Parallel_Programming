@@ -15,7 +15,7 @@
 /* In course server, the code can run success fully by the command:
 ** gcc -O2 CP631_Final_serial.c -o CP631_Final_serial.x
 **
-** Then, the code can be run by the command:  
+** Then, the code can be run by the command:
 **  ./CP631_Final_serial.x
 **
 ** If in the server with small memory space, run the command below to prevent segfaults:
@@ -32,6 +32,12 @@
 /*********************************************************************************************/
 #define    MAX_NUMBER            (1000000000)
 #define    NEEDED_PRIME_NUM      (5)
+/* Make sure the following definition satisfy the condition:
+** (CPU_CALC_END * CPU_CALC_END) > MAX_NUMBER
+** CPU runs the sieve arithmetic for the range [2, CPU_CALC_END)
+** and GPU runs the remain part [CPU_CALC_END, MAX_NUMBER]    */
+#define    CPU_CALC_END          (32000)
+
 
 typedef struct
 {
@@ -82,9 +88,12 @@ int main()
             continue;
         }
 
-        for (j=i+i;j<DIM;j=j+i)
+        if (i < CPU_CALC_END)
         {
-            sieve[j]=0;
+            for (j=i+i;j<DIM;j=j+i)
+            {
+                sieve[j]=0;
+            }
         }
 
         currDistance = i - lastPrime;
@@ -103,7 +112,7 @@ int main()
                     primeList[j].distance = currDistance;
                     break;
                 }
-                else
+                else if (NEEDED_PRIME_NUM != j)
                 {
                     /* Move the item */
                     primeList[j].smallPrime = primeList[j-1].smallPrime;
@@ -126,8 +135,8 @@ int main()
 
     gettimeofday(&currentTime, NULL);
 
-    printf("Now, print the 5 biggest distances between two continue prime numbers.\n");
-    for(i=0;i<NEEDED_PRIME_NUM;i++)
+    printf("Now, print the %d biggest distances between two continue prime numbers.\n", NEEDED_PRIME_NUM);
+    for(i=0; i<NEEDED_PRIME_NUM; i++)
     {
         printf("Between continue prime number (%d) and (%d), the distance is (%d). \n", primeList[i].smallPrime, primeList[i].largePrime, primeList[i].distance);
     }
