@@ -8,15 +8,16 @@
 **  This file was written by Chunxiang Zhang and Vishnu Sukumaran for CP631 course project
 **  of computer science master program in Wilfrid Laurier University in July 2019.
 **
-**  v1.0   Chunxiang Zhang
+**  v1.0   Chunxiang Zhang & Vishnu Sukumaran
+**  v1.1   Chunxiang Zhang
 **
 **********************************************************************************************/
 
 /* In course server, the code can run success fully by the command:
-** gcc -O2 CP631_Final_serial.c -o CP631_Final_serial.x
+**  mpicc -O2 CP631_Final_MPI.c -o CP631_Final_MPI.x
 **
 ** Then, the code can be run by the command:
-**  ./CP631_Final_serial.x
+**  mpirun -np 24 ./CP631_Final_MPI.x
 **
 ** If in the server with small memory space, run the command below to prevent segfaults:
 ** ulimit -s unlimited
@@ -160,22 +161,17 @@ int main(int argc, char **argv)
     start = CPU_CALC_END + numInProc*my_rank;
     end = start+numInProc;
 
+    /* Let's cover all the range. Special handle for first and last process */
+    if (my_rank == (num_processors-1))
+    {
+        end = MAX_NUMBER;
+    }
+
     /* All processes handle the same numbers except for the first and last one
     ** There are two parts  in the memory:
     ** [0, CPU_CALC_END] for common base prime numbers
     ** [CPU_CALC_END, MAX_NUMBER] for that process area                    */
     numInProc = CPU_CALC_END  + end - start + 1;
-
-    /* Let's cover all the range. Special handle for first and last process */
-    if (0 == my_rank)
-    {
-        //start = 0;
-    }
-    else if (my_rank == (num_processors-1))
-    {
-        end = MAX_NUMBER;
-    }
-
 
     /* Now, the memory needs to be allocated in every process. */
     sieve = (unsigned char*)malloc(sizeof(unsigned char)*(numInProc));
@@ -273,11 +269,15 @@ int main(int argc, char **argv)
             }
         }
         /* The current distance is larger than the smallest record distance. Save it. */
-        if (currDistance >= primeList[foundPrimeNum].distance)
+        if ((foundPrimeNum < NEEDED_PRIME_NUM) || (currDistance >= primeList[foundPrimeNum-1].distance))
         {
 			if (lastPrime <= CPU_CALC_END)
 			{
-                InsertLargeDistance(currDistance, lastPrime, i);
+				/* Only first process handle the range [0, CPU_CALC_END] */
+				if  (0 == my_rank)
+				{
+                    InsertLargeDistance(currDistance, lastPrime, i);
+				}
 			}
 			else
 			{

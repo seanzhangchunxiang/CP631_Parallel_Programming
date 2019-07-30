@@ -32,12 +32,12 @@
 /*********************************************************************************************/
 #define    MAX_NUMBER            (1000000000)
 #define    NEEDED_PRIME_NUM      (5)
+
 /* Make sure the following definition satisfy the condition:
 ** (CPU_CALC_END * CPU_CALC_END) > MAX_NUMBER
 ** CPU runs the sieve arithmetic for the range [2, CPU_CALC_END)
 ** and GPU runs the remain part [CPU_CALC_END, MAX_NUMBER]    */
 #define    CPU_CALC_END          (32000)
-
 
 typedef struct
 {
@@ -74,6 +74,12 @@ int main()
 
     sieve = (unsigned char*)malloc(sizeof(unsigned char)*DIM);
 
+    if (NULL == sieve)
+    {
+        printf("Failed to allocate the memory!\n");
+        return 0;
+    }
+
     for (i=2; i<DIM; i++)
     {
         sieve[i]=1; //initialize
@@ -88,7 +94,7 @@ int main()
             continue;
         }
 
-        if (i < CPU_CALC_END)
+        if (i <= CPU_CALC_END)
         {
             for (j=i+i;j<DIM;j=j+i)
             {
@@ -98,8 +104,8 @@ int main()
 
         currDistance = i - lastPrime;
 
-        /* The current distance is larger than the smallest record distance. Save it. */
-        if (currDistance >= recSmallDist)
+        /* The current distance is larger enough or less than 5 distances. Save it. */
+        if ((currDistance > recSmallDist) || (foundPrimeNum < NEEDED_PRIME_NUM))
         {
             for (j=foundPrimeNum; j>=0; j--)
             {
