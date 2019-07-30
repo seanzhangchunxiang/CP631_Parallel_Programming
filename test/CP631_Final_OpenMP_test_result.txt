@@ -1,0 +1,55 @@
+foundByCPU(3432), start(32000), end(41697333),ID(0)!
+foundByCPU(3432), start(833338660), end(875003993),ID(20)!
+foundByCPU(3432), start(208358665), end(250023998),ID(5)!
+foundByCPU(3432), start(375019997), end(416685330),ID(9)!
+foundByCPU(3432), start(666677328), end(708342661),ID(16)!
+foundByCPU(3432), start(541681329), end(583346662),ID(13)!
+foundByCPU(3432), start(875003993), end(916669326),ID(21)!
+foundByCPU(3432), start(625011995), end(666677328),ID(15)!
+foundByCPU(3432), start(125027999), end(166693332),ID(3)!
+foundByCPU(3432), start(291689331), end(333354664),ID(7)!
+foundByCPU(3432), start(333354664), end(375019997),ID(8)!
+foundByCPU(3432), start(458350663), end(500015996),ID(11)!
+foundByCPU(3432), start(41697333), end(83362666),ID(1)!
+foundByCPU(3432), start(916669326), end(958334659),ID(22)!
+foundByCPU(3432), start(750007994), end(791673327),ID(18)!
+foundByCPU(3432), start(416685330), end(458350663),ID(10)!
+foundByCPU(3432), start(958334659), end(1000000000),ID(23)!
+foundByCPU(3432), start(250023998), end(291689331),ID(6)!
+foundByCPU(3432), start(166693332), end(208358665),ID(4)!
+foundByCPU(3432), start(791673327), end(833338660),ID(19)!
+foundByCPU(3432), start(583346662), end(625011995),ID(14)!
+foundByCPU(3432), start(500015996), end(541681329),ID(12)!
+foundByCPU(3432), start(83362666), end(125027999),ID(2)!
+foundByCPU(3432), start(708342661), end(750007994),ID(17)!
+firstPrimeInthreadc(166693339), ID(4)!
+firstPrimeInthreadc(125028031), ID(3)!
+firstPrimeInthreadc(83362703), ID(2)!
+firstPrimeInthreadc(250024003), ID(6)!
+firstPrimeInthreadc(333354733), ID(8)!
+firstPrimeInthreadc(416685343), ID(10)!
+firstPrimeInthreadc(500016007), ID(12)!
+firstPrimeInthreadc(41697349), ID(1)!
+firstPrimeInthreadc(833338669), ID(20)!
+firstPrimeInthreadc(291689351), ID(7)!
+firstPrimeInthreadc(666677369), ID(16)!
+firstPrimeInthreadc(583346671), ID(14)!
+firstPrimeInthreadc(750008009), ID(18)!
+firstPrimeInthreadc(458350663), ID(11)!
+firstPrimeInthreadc(375020029), ID(9)!
+firstPrimeInthreadc(541681339), ID(13)!
+firstPrimeInthreadc(208358671), ID(5)!
+firstPrimeInthreadc(916669331), ID(22)!
+firstPrimeInthreadc(2), ID(0)!
+firstPrimeInthreadc(708342671), ID(17)!
+firstPrimeInthreadc(625012001), ID(15)!
+firstPrimeInthreadc(791673329), ID(19)!
+firstPrimeInthreadc(875003993), ID(21)!
+firstPrimeInthreadc(958334687), ID(23)!
+Now, print the 5 biggest distances between two continue prime numbers.
+Between continue prime number (436273009) and (436273291), the distance is (282). 
+Between continue prime number (649580171) and (649580447), the distance is (276). 
+Between continue prime number (944192807) and (944193067), the distance is (260). 
+Between continue prime number (630045137) and (630045389), the distance is (252). 
+Between continue prime number (387096133) and (387096383), the distance is (250). 
+Total time taken by CPU:  4.511432 seconds
