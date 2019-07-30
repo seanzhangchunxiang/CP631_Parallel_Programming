@@ -1,0 +1,38 @@
+Process 11 found first prime 32016
+Process 13 found first prime 32010
+Process 5 found first prime 32006
+Process 9 found first prime 32032
+Process 3 found first prime 32032
+Process 2 found first prime 32037
+Process 1 found first prime 32016
+Process 8 found first prime 32069
+Process 15 found first prime 32006
+Process 23 found first prime 32028
+Process 4 found first prime 32007
+Process 16 found first prime 32041
+Process 10 found first prime 32013
+Process 17 found first prime 32010
+Process 21 found first prime 32006
+Process 6 found first prime 32005
+Process 19 found first prime 32002
+Process 7 found first prime 32020
+Process 18 found first prime 32015
+Process 12 found first prime 32011
+Process 14 found first prime 32009
+Process 20 found first prime 32009
+Process 22 found first prime 32005
+Largest distance in 10 process
+Largest distance in 15 process
+Largest distance in 22 process
+Largest distance in 15 process
+Largest distance in 12 process
+Largest distance in 17 process
+Largest distance in 10 process
+Largest distance in 9 process
+Now, print the 5 biggest distances between two continue prime numbers.
+Between continue prime number (436273009) and (436273291), the distance is (282). 
+Between continue prime number (649580171) and (649580447), the distance is (276). 
+Between continue prime number (944192807) and (944193067), the distance is (260). 
+Between continue prime number (630045137) and (630045389), the distance is (252). 
+Between continue prime number (708730291) and (708730541), the distance is (250). 
+Total time taken by CPU:  1.032384 seconds

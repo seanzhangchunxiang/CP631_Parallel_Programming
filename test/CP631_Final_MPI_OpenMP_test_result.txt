@@ -1,0 +1,55 @@
+foundByCPU(3432), startThd(500015999), endThd(541681332), my_rank(3), ID(0)!
+foundByCPU(3432), startThd(166693333), endThd(208358666), my_rank(1), ID(0)!
+foundByCPU(3432), startThd(833338665), endThd(875003999), my_rank(5), ID(0)!
+foundByCPU(3432), startThd(541681332), endThd(583346665), my_rank(3), ID(1)!
+foundByCPU(3432), startThd(583346665), endThd(625011998), my_rank(3), ID(2)!
+foundByCPU(3432), startThd(625011998), endThd(666677332), my_rank(3), ID(3)!
+foundByCPU(3432), startThd(666677332), endThd(708342665), my_rank(4), ID(0)!
+foundByCPU(3432), startThd(333354666), endThd(375019999), my_rank(2), ID(0)!
+foundByCPU(3432), startThd(375019999), endThd(416685332), my_rank(2), ID(1)!
+foundByCPU(3432), startThd(416685332), endThd(458350665), my_rank(2), ID(2)!
+foundByCPU(3432), startThd(458350665), endThd(500015999), my_rank(2), ID(3)!
+foundByCPU(3432), startThd(250023999), endThd(291689332), my_rank(1), ID(2)!
+foundByCPU(3432), startThd(208358666), endThd(250023999), my_rank(1), ID(1)!
+foundByCPU(3432), startThd(291689332), endThd(333354666), my_rank(1), ID(3)!
+foundByCPU(3432), startThd(750007998), endThd(791673331), my_rank(4), ID(2)!
+foundByCPU(3432), startThd(708342665), endThd(750007998), my_rank(4), ID(1)!
+foundByCPU(3432), startThd(791673331), endThd(833338665), my_rank(4), ID(3)!
+foundByCPU(3432), startThd(958334667), endThd(1000000000), my_rank(5), ID(3)!
+foundByCPU(3432), startThd(32000), endThd(41697333), my_rank(0), ID(0)!
+foundByCPU(3432), startThd(916669333), endThd(958334667), my_rank(5), ID(2)!
+foundByCPU(3432), startThd(83362666), endThd(125027999), my_rank(0), ID(2)!
+foundByCPU(3432), startThd(41697333), endThd(83362666), my_rank(0), ID(1)!
+foundByCPU(3432), startThd(125027999), endThd(166693333), my_rank(0), ID(3)!
+foundByCPU(3432), startThd(875003999), endThd(916669333), my_rank(5), ID(1)!
+firstPrimeInProc(291689351), my_rank(1), ID(3)!
+firstPrimeInProc(625012001), my_rank(3), ID(3)!
+firstPrimeInProc(958334687), my_rank(5), ID(3)!
+firstPrimeInProc(208358671), my_rank(1), ID(1)!
+firstPrimeInProc(250024003), my_rank(1), ID(2)!
+firstPrimeInProc(541681339), my_rank(3), ID(1)!
+firstPrimeInProc(125028031), my_rank(0), ID(3)!
+firstPrimeInProc(500016007), my_rank(3), ID(0)!
+firstPrimeInProc(791673341), my_rank(4), ID(3)!
+firstPrimeInProc(83362703), my_rank(0), ID(2)!
+firstPrimeInProc(833338669), my_rank(5), ID(0)!
+firstPrimeInProc(41697349), my_rank(0), ID(1)!
+firstPrimeInProc(583346671), my_rank(3), ID(2)!
+firstPrimeInProc(458350679), my_rank(2), ID(3)!
+firstPrimeInProc(708342671), my_rank(4), ID(1)!
+firstPrimeInProc(916669343), my_rank(5), ID(2)!
+firstPrimeInProc(750008009), my_rank(4), ID(2)!
+firstPrimeInProc(666677369), my_rank(4), ID(0)!
+firstPrimeInProc(166693339), my_rank(1), ID(0)!
+firstPrimeInProc(875003999), my_rank(5), ID(1)!
+firstPrimeInProc(333354733), my_rank(2), ID(0)!
+firstPrimeInProc(416685343), my_rank(2), ID(2)!
+firstPrimeInProc(2), my_rank(0), ID(0)!
+firstPrimeInProc(375020029), my_rank(2), ID(1)!
+Now, print the 5 biggest distances between two continue prime numbers.
+Between continue prime number (436273009) and (436273291), the distance is (282). 
+Between continue prime number (649580171) and (649580447), the distance is (276). 
+Between continue prime number (944192807) and (944193067), the distance is (260). 
+Between continue prime number (630045137) and (630045389), the distance is (252). 
+Between continue prime number (708730291) and (708730541), the distance is (250). 
+Total time taken by CPU:  2.361375 seconds

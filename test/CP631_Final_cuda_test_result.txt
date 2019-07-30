@@ -1,0 +1,9 @@
+First time taken by CPU:  0.000282 seconds
+Largest prime number is 999999937. 
+Now, print the 5 biggest distances between two continue prime numbers.
+Between continue prime number (436273009) and (436273291), the distance is (282). 
+Between continue prime number (649580171) and (649580447), the distance is (276). 
+Between continue prime number (944192807) and (944193067), the distance is (260). 
+Between continue prime number (630045137) and (630045389), the distance is (252). 
+Between continue prime number (387096133) and (387096383), the distance is (250). 
+Total time taken by CPU:  6.684707 seconds
